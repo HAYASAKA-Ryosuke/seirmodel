@@ -31,7 +31,8 @@ if __name__ == '__main__':
     I = 2195  # 発症者数
     R = 0  # 有免疫者数
     N = S + E + I + R  # 全人口
-    b = R0 / infectious  # 感染率
+    isolation = 0.1  # 自粛(孤立やマスク着用)
+    b = (1 - isolation) * R0 / infectious  # 感染率
     a = 1 / latency  # 1日あたりの発症率
     g = 1 / infectious  # 1日あたりの回復率
     all_days = 30
