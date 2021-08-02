@@ -23,12 +23,12 @@ def seir(seir, t, b, a, g, N):
 if __name__ == '__main__':
     """
     """
-    R0 = 2.5  # 基本生産数
-    infectious = 10.0  # 平均発症期間
-    latency = 6.0 # 平均潜伏期間
-    S = 1000000   # 無免疫者数
-    E = 90  # 潜伏感染者数
-    I = 100  # 発症者数
+    R0 = 1.77 # 基本生産数
+    infectious = 4.8  # 平均発症期間
+    latency = 5.6 # 平均潜伏期間
+    S = 13960000   # 無免疫者数
+    E = R0 * 2195  # 潜伏感染者数
+    I = 2195  # 発症者数
     R = 0  # 有免疫者数
     N = S + E + I + R  # 全人口
     b = R0 / infectious  # 感染率
@@ -38,6 +38,8 @@ if __name__ == '__main__':
     t = numpy.arange(0, all_days, 1)
     args = (b, a, g, N)
     result = odeint(seir, (S, E, I, R), t, args)
+    for days, data in enumerate(result):
+        print(days, data[2])
     plt.plot(t, result)
     plt.legend(['S', 'E', 'I', 'R'])
     plt.xlabel('days')
